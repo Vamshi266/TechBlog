@@ -4,10 +4,7 @@
  */
 package com.techblog.servlets;
 
-import com.techblog.dao.UserDao;
 import com.techblog.entities.Message;
-import com.techblog.entities.User;
-import com.techblog.helper.ConnectionProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author vamsh
  */
-public class LoginServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,36 +36,19 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");
+            out.println("<title>Servlet LogoutServlet</title>");
             out.println("</head>");
             out.println("<body>");
             
-            String userEmail = request.getParameter("email");
-            String userPassword = request.getParameter("password");
+            HttpSession session = request.getSession();
             
-            UserDao userDao = new UserDao(ConnectionProvider.getConnection());
+            session.removeAttribute("currentUser");
             
-            User user = userDao.getUserByEmailAndPassword(userEmail, userPassword);
+            Message msg = new Message("Logout succesfully", "success", "alert-success");
             
-            if(user == null)
-            {
-//                login error
-                
-                Message msg = new Message("Invalid Details!", "error", "alert-danger");
-                
-                HttpSession session = request.getSession();
-                
-                session.setAttribute("msg", msg);
-                
-                response.sendRedirect("login_page.jsp");
-            }
-            else
-            {
-//                login success
-                HttpSession session = request.getSession();
-                session.setAttribute("currentUser", user);
-                response.sendRedirect("profile.jsp");
-            }
+            response.sendRedirect("login_page.jsp");
+            
+            session.setAttribute("msg", msg);
             
             out.println("</body>");
             out.println("</html>");
