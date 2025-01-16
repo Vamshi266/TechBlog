@@ -73,7 +73,7 @@
                 <ul class="navbar-nav mr-right">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#"> <span class="fa fa-user"></span> <%= user.getUser_name()%></a>
+                        <a class="nav-link" href="#!" data-toggle="modal" data-target="#profile-modal"> <span class="fa fa-user"></span> <%= user.getUser_name()%></a>
                     </li>
 
                     <li class="nav-item">
@@ -84,6 +84,67 @@
             </div>
         </nav>
         <!--nav-bar end-->
+
+
+        <!-- Modal start -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#profile-modal">
+            Launch demo modal
+        </button>
+
+
+        <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header primary-background text-white">
+                        <h5 class="modal-title" id="exampleModalLabel">TechBlog</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="container text-center">
+                            <img src="pics/<%= user.getProfile()%>" style="border-radius: 50%;max-width: 200px; max-height: 200px" alt="alt"/>
+                            <br>
+                            <h5 class="modal-title mt-3" id="exampleModalLabel"><%= user.getUser_name()%></h5>
+                            <!--details start-->
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">ID : </th>
+                                        <td> <%= user.getId()%> </td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Email : </th>
+                                        <td><%= user.getUser_email()%></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Gender : </th>
+                                        <td><%= user.getGender()%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">About : </th>
+                                        <td><%= user.getAbout()%></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Created On : </th>
+                                        <td><%= user.getReg_date()%></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!--details end-->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal end -->
 
 
 
