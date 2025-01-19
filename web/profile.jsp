@@ -137,7 +137,7 @@
                             <!--profile edit-->
                             <div id="profile-edit" style="display: none;">
                                 <h3>Edit Details</h3>
-                                <form action="EditServlet" method="post">
+                                <form action="EditServlet" method="post" enctype="multipart/form-data">
                                     <table class="table">
                                         <tr>
                                             <td>ID </td>
