@@ -7,6 +7,8 @@ package com.techblog.servlets;
 import com.techblog.dao.UserDao;
 import com.techblog.entities.User;
 import com.techblog.helper.ConnectionProvider;
+import com.techblog.helper.Helper;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,7 +23,6 @@ import javax.servlet.http.Part;
  *
  * @author vamsh
  */
-
 @MultipartConfig
 public class EditServlet extends HttpServlet {
 
@@ -45,42 +46,45 @@ public class EditServlet extends HttpServlet {
             out.println("<title>Servlet EditServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            
-            String userEmail = request.getParameter("user_name");
+
+            String userEmail = request.getParameter("user_email");
             String userName = request.getParameter("user_name");
             String userPassword = request.getParameter("user_password");
             String userAbout = request.getParameter("user_about");
             Part part = request.getPart("image");
-            String ImageName = part.getSubmittedFileName();
-            
+            String imageName = part.getSubmittedFileName();
+
             //get the user from the session
-            
-            
             HttpSession session = request.getSession();
-            
-            User user = (User)session.getAttribute("currentUser");
-            
+
+            User user = (User) session.getAttribute("currentUser");
+
             user.setUser_email(userEmail);
             user.setUser_name(userName);
             user.setUser_password(userPassword);
             user.setAbout(userAbout);
-            user.setProfile(ImageName);
-            
+            if (imageName != null) {
+                user.setProfile(imageName);
+            }
+
             //update db
-            
             UserDao dao = new UserDao(ConnectionProvider.getConnection());
-            
+
             boolean res = dao.updateUser(user);
-            
-            if(res)
-            {
-                out.println("data updated");
+
+            if (res) {
+
+                String path = request.getRealPath("/") + "pics" + File.separator + user.getProfile();
+
+//                Helper.deleteFile(path);
+                if (Helper.saveFile(part.getInputStream(), path)) {
+                    out.println("profile updated");
+                }
+
+            } else {
+                out.println("profile update failed");
             }
-            else
-            {
-                out.println("update failed");
-            }
-            
+
             out.println("</body>");
             out.println("</html>");
         }
