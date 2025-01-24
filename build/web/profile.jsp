@@ -4,6 +4,7 @@
     Author     : vamsh
 --%>
 
+<%@page import="com.techblog.entities.Message"%>
 <%@page import="com.techblog.entities.User" %>
 <%@page errorPage="error_page.jsp" %>
 
@@ -84,6 +85,27 @@
             </div>
         </nav>
         <!--nav-bar end-->
+
+        <!--msg start-->
+
+        <%
+            Message msg = (Message) session.getAttribute("msg");
+
+            if (msg != null) {
+
+        %>
+
+        <div class="alert <%= msg.getCssClass()%>" role="alert">
+            <%= msg.getContent()%>
+        </div>
+
+        <%
+                session.removeAttribute("msg");
+            }
+
+        %>
+
+        <!--msg end-->
 
 
         <!-- Modal start -->

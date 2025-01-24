@@ -5,6 +5,7 @@
 package com.techblog.servlets;
 
 import com.techblog.dao.UserDao;
+import com.techblog.entities.Message;
 import com.techblog.entities.User;
 import com.techblog.helper.ConnectionProvider;
 import com.techblog.helper.Helper;
@@ -63,9 +64,7 @@ public class EditServlet extends HttpServlet {
             user.setUser_name(userName);
             user.setUser_password(userPassword);
             user.setAbout(userAbout);
-            if (imageName != null) {
-                user.setProfile(imageName);
-            }
+            user.setProfile(imageName);
 
             //update db
             UserDao dao = new UserDao(ConnectionProvider.getConnection());
@@ -76,14 +75,25 @@ public class EditServlet extends HttpServlet {
 
                 String path = request.getRealPath("/") + "pics" + File.separator + user.getProfile();
 
-//                Helper.deleteFile(path);
+                Helper.deleteFile(path);
                 if (Helper.saveFile(part.getInputStream(), path)) {
                     out.println("profile updated");
+
+                    Message msg = new Message("profile updated", "success", "alert-success");
+                    session.setAttribute("msg", msg);
+
+                } else {
+                    Message msg = new Message("something went wrong", "error", "alert-danger");
+                    session.setAttribute("msg", msg);
                 }
 
             } else {
-                out.println("profile update failed");
+
+                Message msg = new Message("something went wrong", "error", "alert-danger");
+                session.setAttribute("msg", msg);
             }
+
+            response.sendRedirect("profile.jsp");
 
             out.println("</body>");
             out.println("</html>");
