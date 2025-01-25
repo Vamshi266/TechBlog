@@ -64,6 +64,9 @@ public class EditServlet extends HttpServlet {
             user.setUser_name(userName);
             user.setUser_password(userPassword);
             user.setAbout(userAbout);
+
+            String oldImage = user.getProfile();
+
             user.setProfile(imageName);
 
             //update db
@@ -73,9 +76,14 @@ public class EditServlet extends HttpServlet {
 
             if (res) {
 
+                String oldPath = request.getRealPath("/") + "pics" + File.separator + oldImage;
                 String path = request.getRealPath("/") + "pics" + File.separator + user.getProfile();
 
-                Helper.deleteFile(path);
+                if (!oldImage.equals("default.jpg"));
+                {
+                    Helper.deleteFile(oldPath);
+                }
+
                 if (Helper.saveFile(part.getInputStream(), path)) {
                     out.println("profile updated");
 
