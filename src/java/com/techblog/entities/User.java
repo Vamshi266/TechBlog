@@ -11,7 +11,7 @@ package com.techblog.entities;
 import java.sql.*;
 
 public class User {
-    
+
     private int id;
     private String user_name;
     private String user_email;
@@ -19,6 +19,7 @@ public class User {
     private String gender;
     private String about;
     private String profile;
+    private Timestamp reg_date;
 
     public String getProfile() {
         return profile;
@@ -38,13 +39,11 @@ public class User {
         this.about = about;
         this.reg_date = reg_date;
     }
-    private Timestamp reg_date;
 
     //no args contructor
     public User() {
     }
 
-    
     //all args constructor excluding 'id'
     public User(String user_name, String user_email, String user_password, String gender, String about) {
         this.user_name = user_name;
@@ -53,9 +52,8 @@ public class User {
         this.gender = gender;
         this.about = about;
     }
-    
-//    getters and setter
 
+//    getters and setter
     public int getId() {
         return id;
     }
@@ -111,8 +109,5 @@ public class User {
     public void setReg_date(Timestamp reg_date) {
         this.reg_date = reg_date;
     }
-    
-    
-    
-    
+
 }
