@@ -4,6 +4,10 @@
     Author     : vamsh
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.techblog.entities.Category"%>
+<%@page import="com.techblog.helper.ConnectionProvider"%>
+<%@page import="com.techblog.dao.PostDao"%>
 <%@page import="com.techblog.entities.Message"%>
 <%@page import="com.techblog.entities.User" %>
 <%@page errorPage="error_page.jsp" %>
@@ -67,6 +71,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#"> <span class="fa fa-phone"></span> Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#add-post-modal"> <span class="fa fa-drivers-license-o"></span> do Post</a>
                     </li>
 
                 </ul>
@@ -222,7 +229,68 @@
         </div>
         <!-- Modal end -->
 
+        <!--start of post modal-->
 
+        <div class="modal fade" id="add-post-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">create post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="AddPostServlet" method="post">
+
+                            <div class="form-group">
+
+                                <select class="form-control">
+                                    <option selected disabled>---select category---</option>
+                                    <%
+                                        PostDao postDao = new PostDao(ConnectionProvider.getConnection());
+                                        ArrayList<Category> categories = postDao.getAllCategories();
+
+                                        for (Category category : categories) {
+
+                                    %>
+                                    <option><%= category.getcName()%></option>
+
+                                    <%
+                                        }
+                                    %>
+                                </select>
+                            </div>
+
+                            <br>
+
+                            <div class="form-group">
+                                <input typr="text" placeholder="Enter post title" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <textarea style="height:300px" class="form-control" placeholder="Enter post content"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>choose your pic</label>
+                                <br>
+                                <input type="file">
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--end of post modal-->
 
 
 
