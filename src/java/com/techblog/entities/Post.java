@@ -18,25 +18,28 @@ public class Post {
     private String pic;
     private Timestamp regDate;
     private int cId;
+    private int uId;
 
-    public Post(int pId, String pTitle, String pContent, String pic, Timestamp regDate, int cId) {
+    public Post(int pId, String pTitle, String pContent, String pic, Timestamp regDate, int cId, int uId) {
         this.pId = pId;
         this.pTitle = pTitle;
         this.pContent = pContent;
         this.pic = pic;
         this.regDate = regDate;
         this.cId = cId;
+        this.uId = uId;
     }
 
-    public Post() {
-    }
-
-    public Post(String pTitle, String pContent, String pic, Timestamp regDate, int cId) {
+    public Post(String pTitle, String pContent, String pic, Timestamp regDate, int cId, int uId) {
         this.pTitle = pTitle;
         this.pContent = pContent;
         this.pic = pic;
         this.regDate = regDate;
         this.cId = cId;
+        this.uId = uId;
+    }
+
+    public Post() {
     }
 
     public int getpId() {
@@ -85,6 +88,14 @@ public class Post {
 
     public void setcId(int cId) {
         this.cId = cId;
+    }
+
+    public int getuId() {
+        return uId;
+    }
+
+    public void setuId(int uId) {
+        this.uId = uId;
     }
 
 }

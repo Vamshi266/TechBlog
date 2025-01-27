@@ -241,11 +241,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="AddPostServlet" method="post">
+                        <form id="add-post-form" action="AddPostServlet" method="post">
 
                             <div class="form-group">
 
-                                <select class="form-control">
+                                <select class="form-control" name="cid">
                                     <option selected disabled>---select category---</option>
                                     <%
                                         PostDao postDao = new PostDao(ConnectionProvider.getConnection());
@@ -254,7 +254,7 @@
                                         for (Category category : categories) {
 
                                     %>
-                                    <option><%= category.getcName()%></option>
+                                    <option value="<%= category.getcId()%>" name="cid"><%= category.getcName()%></option>
 
                                     <%
                                         }
@@ -265,27 +265,28 @@
                             <br>
 
                             <div class="form-group">
-                                <input typr="text" placeholder="Enter post title" class="form-control" />
+                                <input name="post_title" typr="text" placeholder="Enter post title" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <textarea style="height:300px" class="form-control" placeholder="Enter post content"></textarea>
+                                <textarea name="post_content" style="height:300px" class="form-control" placeholder="Enter post content"></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label>choose your pic</label>
                                 <br>
-                                <input type="file">
+                                <input type="file" name="pic">
                             </div>
 
-
+                            <div class="container text-center">
+                                <button type="submit" class="btn btn-outline-primary">Post</button>
+                            </div>
 
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -326,6 +327,42 @@
 
                 });
             });
+        </script>
+
+        <!--post js-->
+        <script>
+
+            $(document).ready(function (e) {
+
+
+                $("#add-post-form").on("submit", function (event) {
+                    //this code get's called when form is submitted
+
+                    event.preventDefault(); // prevents default form bahaviour
+                    console.log("post submitted");
+                    let form = new FormData(this);
+
+                    //now requesting to server
+                    $.ajax({
+                        url: "AddPostServlet",
+                        type: 'POST',
+                        data: form,
+                        success: function (data, textStatus, jqXHR) {
+                            //req success
+                            console.log(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            //req failed
+
+                        },
+                        processData: false,
+                        contentType: false
+                    })
+
+                })
+
+            })
+
         </script>
 
     </body>

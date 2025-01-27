@@ -9,6 +9,7 @@ package com.techblog.dao;
  * @author vamsh
  */
 import com.techblog.entities.Category;
+import com.techblog.entities.Post;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -46,6 +47,32 @@ public class PostDao {
         }
 
         return al;
+    }
+
+    public boolean savePost(Post post) {
+        boolean flag = false;
+
+        try {
+
+            String query = "insert into posts(ptitle,pcontent,pic,uid,cid) values (?,?,?,?,?);";
+
+            PreparedStatement pstmt = con.prepareStatement(query);
+
+            pstmt.setString(1, post.getpTitle());
+            pstmt.setString(2, post.getpContent());
+            pstmt.setString(3, post.getPic());
+            pstmt.setInt(4, post.getcId());
+            pstmt.setInt(5, post.getuId());
+
+            pstmt.executeUpdate();
+            flag = true;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return flag;
     }
 
 }
