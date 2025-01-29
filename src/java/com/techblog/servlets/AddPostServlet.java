@@ -39,12 +39,12 @@ public class AddPostServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddPostServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet AddPostServlet</title>");
+//            out.println("</head>");
+//            out.println("<body>");
 
             String postTitle = request.getParameter("post_title");
             String postContent = request.getParameter("post_content");
@@ -63,13 +63,13 @@ public class AddPostServlet extends HttpServlet {
             boolean res = dao.savePost(post);
 
             if (res) {
-                out.println("post saved");
+                out.println("done");
 
             } else {
                 out.println("error");
             }
-            out.println("</body>");
-            out.println("</html>");
+//            out.println("</body>");
+//            out.println("</html>");
         }
     }
 
