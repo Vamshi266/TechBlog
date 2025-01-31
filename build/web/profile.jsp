@@ -114,6 +114,48 @@
 
         <!--msg end-->
 
+        <!--start of main body-->
+
+        <main>
+            <div class="container">
+                <div class="row mt-5">
+                    <!--categories-->
+                    <div class="col-md-4">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item primary-background text-white">
+                                Categories
+                            </a>
+
+                            <%                                PostDao dao = new PostDao(ConnectionProvider.getConnection());
+                                ArrayList<Category> al = dao.getAllCategories();
+                                for (Category category : al) {
+                            %>
+
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <%= category.getcName()%>
+                            </a>
+
+                            <%
+                                }
+                            %>
+
+                        </div>
+                    </div>
+                    <!--posts-->
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </main>
+
+
+        <!--end of main body-->
+
 
         <!-- Modal start -->
         <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
