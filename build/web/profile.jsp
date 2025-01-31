@@ -126,7 +126,8 @@
                                 Categories
                             </a>
 
-                            <%                                PostDao dao = new PostDao(ConnectionProvider.getConnection());
+                            <%
+                                PostDao dao = new PostDao(ConnectionProvider.getConnection());
                                 ArrayList<Category> al = dao.getAllCategories();
                                 for (Category category : al) {
                             %>
@@ -141,8 +142,18 @@
 
                         </div>
                     </div>
+
+
                     <!--posts-->
                     <div class="col-md-8">
+                        <div class="container text-center" id="loader">
+                            <i class="fa fa-refresh fa-3x fa-spin"></i>
+                            <h3 class="mt-2">Loading...</h3>
+                        </div>
+
+                        <div class="container-fluid" id="post-container">
+
+                        </div>
 
                     </div>
                 </div>
@@ -414,6 +425,23 @@
 
             })
 
+        </script>
+
+        <!--loading post using ajax-->
+        <script>
+            $(document).ready(function (e) {
+                $.ajax({
+                    url: "load_posts.jsp",
+                    success: function (data, textStatus, jqXHR) {
+//                        console.log(data)
+                        $('#loader').hide()
+                        $('#post-container').html(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log("error")
+                    }
+                })
+            })
         </script>
 
     </body>
