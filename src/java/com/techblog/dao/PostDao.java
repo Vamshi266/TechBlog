@@ -82,7 +82,7 @@ public class PostDao {
 
         //fetch all posts
         try {
-            PreparedStatement pstmt = con.prepareStatement("select * from posts");
+            PreparedStatement pstmt = con.prepareStatement("select * from posts order by pid desc");
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
