@@ -125,14 +125,16 @@
                             <a href="#" class="list-group-item primary-background text-white">
                                 Categories
                             </a>
+                            <a href="#" onclick="getPosts(0)" class="list-group-item list-group-item-action">
+                                All
+                            </a>
 
-                            <%
-                                PostDao dao = new PostDao(ConnectionProvider.getConnection());
+                            <%                                PostDao dao = new PostDao(ConnectionProvider.getConnection());
                                 ArrayList<Category> al = dao.getAllCategories();
                                 for (Category category : al) {
                             %>
 
-                            <a href="#" class="list-group-item list-group-item-action">
+                            <a href="#" onclick="getPosts(<%= category.getcId()%>)" class="list-group-item list-group-item-action">
                                 <%= category.getcName()%>
                             </a>
 
@@ -353,34 +355,34 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <!--<script src="js/script.js" type="text/javascript"></script>-->
         <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 
         <script>
 
-            $(document).ready(function () {
-                let editStatus = false;
+                                $(document).ready(function () {
+                                    let editStatus = false;
 
 //"edit" and "back" toggle logic
-                $('#profile-edit-button').click(function () {
+                                    $('#profile-edit-button').click(function () {
 
-                    if (editStatus === false)
-                    {
-                        $('#profile-details').hide();
-                        $('#profile-edit').show();
-                        editStatus = true;
-                        $(this).text("Back");
-                    } else
-                    {
-                        $('#profile-details').show();
-                        $('#profile-edit').hide();
-                        editStatus = false;
-                        $(this).text("Edit");
-                    }
+                                        if (editStatus === false)
+                                        {
+                                            $('#profile-details').hide();
+                                            $('#profile-edit').show();
+                                            editStatus = true;
+                                            $(this).text("Back");
+                                        } else
+                                        {
+                                            $('#profile-details').show();
+                                            $('#profile-edit').hide();
+                                            editStatus = false;
+                                            $(this).text("Edit");
+                                        }
 
-                });
-            });
+                                    });
+                                });
         </script>
 
         <!--post js-->
@@ -429,18 +431,30 @@
 
         <!--loading post using ajax-->
         <script>
-            $(document).ready(function (e) {
+
+
+            function getPosts(catid)
+            {
+
+                console.log(catid);
+                $('#post-container').hide();
+                $('#loader').show();
                 $.ajax({
                     url: "load_posts.jsp",
+                    data: {cid: catid},
                     success: function (data, textStatus, jqXHR) {
-//                        console.log(data)
                         $('#loader').hide()
+                        $('#post-container').show();
                         $('#post-container').html(data);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log("error")
                     }
                 })
+            }
+
+            $(document).ready(function (e) {
+                getPosts(0);
             })
         </script>
 

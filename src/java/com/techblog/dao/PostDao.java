@@ -55,7 +55,7 @@ public class PostDao {
 
         try {
 
-            String query = "insert into posts(ptitle,pcontent,pic,uid,cid) values (?,?,?,?,?);";
+            String query = "insert into posts(ptitle,pcontent,pic,cid,uid) values (?,?,?,?,?);";
 
             PreparedStatement pstmt = con.prepareStatement(query);
 
@@ -94,7 +94,7 @@ public class PostDao {
                 int cId = rs.getInt("cid");
                 int uId = rs.getInt("uid");
 
-                Post post = new Post(pTitle, pContent, pic, regDate, cId, uId);
+                Post post = new Post(pId, pTitle, pContent, pic, regDate, cId, uId);
 
                 list.add(post);
             }
@@ -124,7 +124,7 @@ public class PostDao {
                 Timestamp regDate = rs.getTimestamp("reg_date");
                 int uId = rs.getInt("uid");
 
-                Post post = new Post(pTitle, pContent, pic, regDate, cId, uId);
+                Post post = new Post(pId, pTitle, pContent, pic, regDate, cId, uId);
 
                 list.add(post);
             }

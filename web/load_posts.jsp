@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.techblog.helper.ConnectionProvider"%>
 <%@page import="com.techblog.dao.PostDao"%>
@@ -7,10 +8,25 @@
 
 
     <%
+        Thread.sleep(1000);
 
         PostDao dao = new PostDao(ConnectionProvider.getConnection());
 
-        List<Post> posts = dao.getAllPosts();
+        int cId = Integer.parseInt(request.getParameter("cid"));
+
+        System.out.print("cid = " + cId);
+
+        List<Post> posts = null;
+        if (cId == 0) {
+            posts = dao.getAllPosts();
+        } else {
+            posts = dao.getPostsByCategoryId(cId);
+        }
+
+        if (posts.size() == 0) {
+            out.println("<h3 class='display-3 text-center'>No posts in this category</h3>");
+            return;
+        }
 
         for (Post post : posts) {
 
