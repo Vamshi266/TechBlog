@@ -40,6 +40,11 @@
                 <b><%= post.getpTitle()%></b>
                 <p><%= post.getpContent()%></p>
             </div>
+            <div class="card-footer">
+                <a href="show_blog_post.jsp?post_id=<%= post.getpId()%>" class="btn btn-outline-primary btn-sm">Read More...</a>
+                <a href="#!" class="btn btn-outline-primary btn-sm"><i class="fa fa-thumbs-o-up"> <span>20</span></i></a>
+                <a href="#!" class="btn btn-outline-primary btn-sm"><i class="fa fa-commenting-o"> <span>10</span></i></a>
+            </div>
         </div>
     </div>
 
