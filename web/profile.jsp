@@ -122,10 +122,10 @@
                     <!--categories-->
                     <div class="col-md-4">
                         <div class="list-group">
-                            <a href="#" class="list-group-item primary-background text-white">
+                            <a href="#" class="list-group-item text-dark" style="background-color: #d9d9d9">
                                 Categories
                             </a>
-                            <a href="#" onclick="getPosts(0)" class="list-group-item list-group-item-action">
+                            <a href="#" onclick="getPosts(0, this)" class="c-link list-group-item list-group-item-action">
                                 All
                             </a>
 
@@ -134,7 +134,7 @@
                                 for (Category category : al) {
                             %>
 
-                            <a href="#" onclick="getPosts(<%= category.getcId()%>)" class="list-group-item list-group-item-action">
+                            <a href="#" onclick="getPosts(<%= category.getcId()%>, this)" class="c-link list-group-item list-group-item-action">
                                 <%= category.getcName()%>
                             </a>
 
@@ -433,12 +433,15 @@
         <script>
 
 
-            function getPosts(catid)
+            function getPosts(catid, temp)
             {
 
                 console.log(catid);
                 $('#post-container').hide();
                 $('#loader').show();
+
+                $('.c-link').removeClass('active');
+
                 $.ajax({
                     url: "load_posts.jsp",
                     data: {cid: catid},
@@ -446,6 +449,7 @@
                         $('#loader').hide()
                         $('#post-container').show();
                         $('#post-container').html(data);
+                        $(temp).addClass('active');
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         console.log("error")
@@ -454,7 +458,10 @@
             }
 
             $(document).ready(function (e) {
-                getPosts(0);
+
+                let allPostRef = $('.c-link')[0];
+
+                getPosts(0, allPostRef);
             })
         </script>
 
