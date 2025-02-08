@@ -169,6 +169,7 @@
 
         <!--end of main body-->
 
+        <!--profile modal start-->
 
         <!-- Modal start -->
         <div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -283,6 +284,8 @@
             </div>
         </div>
         <!-- Modal end -->
+
+        <!--profile modal end-->
 
         <!--start of post modal-->
 

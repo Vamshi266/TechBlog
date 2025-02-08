@@ -35,7 +35,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> <%= post.getpTitle()%> || techblog post </title>
+        <title> <%= post.getpTitle()%>  </title>
 
         <!--bootstrap css-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -47,6 +47,37 @@
             {
                 clip-path: polygon(0 0, 100% 0, 100% 30%, 100% 87%, 74% 84%, 23% 94%, 0 85%, 0% 30%);
             }
+
+            .post-title
+            {
+                font-weight: 100;
+                font-size: 30px;
+            }
+
+            .post-content
+            {
+                font-weight: 100;
+                font-size: 17px;
+            }
+
+            .post-date
+            {
+                font-style: italic;
+                font-weight: bold;
+            }
+
+            .post-user-info
+            {
+                font-size: 20px;
+            }
+
+            .row-user
+            {
+                border: 1px solid #e2e2e2;
+                padding-top: 15px;
+            }
+
+
 
         </style>
 
@@ -109,12 +140,24 @@
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
                         <div class="card-header">
-                            <h4><%= post.getpTitle()%></h4>
-                            <img class="card-img-top my-2" src="pics/<%= post.getPic()%>" alt="Card image cap">
+                            <h4 class="post-title"><%= post.getpTitle()%></h4>
                         </div>
 
                         <div class="card-body">
-                            <p><%= post.getpContent()%></p>
+                            <img class="card-img-top my-2" src="pics/<%= post.getPic()%>" alt="Card image cap">
+
+                            <div class="row my-3 row-user">
+                                <div class="col-md-8">
+                                    <p class="post-user-info">posted by <a href="#!">hulk</a> </p>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <p class="post-date"><%= post.getRegDate().toLocaleString()%></p>
+                                </div>
+
+                            </div>
+
+                            <p class="post-content"><%= post.getpContent()%></p>
                         </div>
 
                         <div class="card-footer">
