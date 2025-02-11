@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="java.text.DateFormat"%>
+<%@page import="com.techblog.dao.UserDao"%>
 <%@page import="com.techblog.entities.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.techblog.helper.ConnectionProvider"%>
@@ -75,6 +77,13 @@
             {
                 border: 1px solid #e2e2e2;
                 padding-top: 15px;
+            }
+
+            body
+            {
+                background: url("img/background-img.jpg");
+                background-size: cover;
+                background-attachment: fixed;
             }
 
 
@@ -148,11 +157,14 @@
 
                             <div class="row my-3 row-user">
                                 <div class="col-md-8">
-                                    <p class="post-user-info">posted by <a href="#!">hulk</a> </p>
+                                    <%
+                                        UserDao userDao = new UserDao(ConnectionProvider.getConnection());
+                                    %>
+                                    <p class="post-user-info">posted by <a href="#!"><%= userDao.getUserByUserId(post.getuId()).getUser_name()%></a> </p>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <p class="post-date"><%= post.getRegDate().toLocaleString()%></p>
+                                    <p class="post-date"><%= DateFormat.getDateTimeInstance().format(post.getRegDate())%></p>
                                 </div>
 
                             </div>

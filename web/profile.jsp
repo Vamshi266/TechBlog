@@ -40,6 +40,13 @@
                 clip-path: polygon(0 0, 100% 0, 100% 30%, 100% 87%, 74% 84%, 23% 94%, 0 85%, 0% 30%);
             }
 
+            body
+            {
+                background: url("img/background-img.jpg");
+                background-size: cover;
+                background-attachment: fixed;
+            }
+
         </style>
 
     </head>
