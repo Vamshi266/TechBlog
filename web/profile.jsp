@@ -155,7 +155,7 @@
 
                     <!--posts-->
                     <div class="col-md-8">
-                        <div class="container text-center" id="loader">
+                        <div class="container text-center text-white" id="loader">
                             <i class="fa fa-refresh fa-3x fa-spin"></i>
                             <h3 class="mt-2">Loading...</h3>
                         </div>

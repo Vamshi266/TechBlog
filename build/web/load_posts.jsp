@@ -24,7 +24,7 @@
         }
 
         if (posts.size() == 0) {
-            out.println("<h3 class='display-3 text-center'>No posts in this category</h3>");
+            out.println("<h3 class='display-3 text-center text-white'>No posts in this category</h3>");
             return;
         }
 

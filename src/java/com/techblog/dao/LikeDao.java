@@ -22,7 +22,7 @@ public class LikeDao {
         boolean flag = false;
         try {
 
-            String query = "insert into like(pid,uid) values(?,?)";
+            String query = "insert into likes(pid,uid) values(?,?)";
             PreparedStatement pstmt = con.prepareStatement(query);
             pstmt.setInt(1, pId);
             pstmt.setInt(2, uId);
