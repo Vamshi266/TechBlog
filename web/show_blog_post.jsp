@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="com.techblog.dao.LikeDao"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="com.techblog.dao.UserDao"%>
 <%@page import="com.techblog.entities.Category"%>
@@ -173,7 +174,13 @@
                         </div>
 
                         <div class="card-footer">
-                            <a href="#!" onclick="doLike(<%= post.getpId()%>,<%= user.getId()%>)" class="btn btn-outline-primary btn-sm"><i class="fa fa-thumbs-o-up"> <span>20</span></i></a>
+
+                            <%
+                                LikeDao likeDao = new LikeDao(ConnectionProvider.getConnection());
+
+                            %>
+
+                            <a href="#!" onclick="doLike(<%= post.getpId()%>,<%= user.getId()%>)" class="btn btn-outline-primary btn-sm"><i class="fa fa-thumbs-o-up"> <span class="like-counter"><%= likeDao.countLikeOnPost(post.getpId())%></span></i></a>
                             <a href="#!" class="btn btn-outline-primary btn-sm"><i class="fa fa-commenting-o"> <span>10</span></i></a>
                         </div>
 
